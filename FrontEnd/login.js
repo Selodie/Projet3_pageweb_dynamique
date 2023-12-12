@@ -1,60 +1,65 @@
-// On récupère la section dans laquelle va apparaître le login
-const sectionLogin = document.getElementById("login");
 
-// Création du titre
-const titleElement =  document.createElement("h2");
-titleElement.innerHTML = "Login";
-sectionLogin.appendChild(titleElement);
+// Appel de l'API avec la méthode POST
+async function fetchUsers (email, password) {
+    const url = 'http://localhost:5678/api/users/login';
+    const response = await fetch (url, {
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Authorization: "Bearer Token"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    return response.json();
+}
 
-// Création d'une div qui va contenir le formulaire du login
-const divElement = document.createElement("div");
-divElement.classList.add("login");
-sectionLogin.appendChild(divElement);
+const form = document.querySelector('form');
 
-// Création d'un formulaire
-const formElement = document.createElement("form");
-formElement.action = "#";
-formElement.method = "post";
-divElement.appendChild(formElement);
+// Ajout d'un écouteur d'événement sur le formulaire pour écouter le submit
+form.addEventListener("submit", (event) => {
+    // On empêche le comportement par défaut
+    event.preventDefault();
 
-// Création label et input pour l'email
+    // On récupère la valeur des input email et mdp
+    const emailValue = document.getElementById("email").value;
+    const passwordValue = document.getElementById("password").value;
 
-const labelEmailElement = document.createElement("label");
-labelEmailElement.setAttribute("for", "email");
-labelEmailElement.innerText = "Email";
-const inputEmailElement = document.createElement("input");
-inputEmailElement.type = "email";
-inputEmailElement.name = "email";
-inputEmailElement.id = "email";
+    // 
+    fetchUsers(emailValue, passwordValue).then(response => {
+        // 
+        if (response.token){
+            //
+            let token = response.token;
+            localStorage.setItem("token", token);
+            console.log(token);
+            window.location.replace( "index.html");    
+        // 
+        } else {
+            alert("Erreur dans l’identifiant ou le mot de passe")
+        }
+    });
+})
 
-formElement.appendChild(labelEmailElement);
-formElement.appendChild(inputEmailElement);
 
-// Création label et input pour le mdp
-const labelPasswordElement = document.createElement("label");
-labelPasswordElement.innerText = "Password";
-labelPasswordElement.setAttribute("for", "password");
-const inputPasswordElement = document.createElement("input");
-inputPasswordElement.type = "password";
-inputPasswordElement.name = "password";
-inputPasswordElement.id = "password";
 
-formElement.appendChild(labelPasswordElement);
-formElement.appendChild(inputPasswordElement);
 
-// Création de l'input submit
 
-const buttonSubmitElement = document.createElement("button");
-buttonSubmitElement.type = "submit";
-buttonSubmitElement.innerText = "Se connecter";
 
-formElement.appendChild(buttonSubmitElement);
 
-// Création d'un lien mdp oublié
 
-const aElement = document.createElement("a");
-aElement.classList.add("password");
-aElement.href = "#";
-aElement.innerText = "Mot de passe oublié ?";
-formElement.appendChild(aElement);
+
+// const options = {
+//     method: 'POST',
+//     headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+//     body: '{"email":"sophie.bluel@test.tld","password":"S0phie"}'
+//   };
+  
+//   fetch('http://localhost:5678/api/users/login', options)
+//     .then(response => response.json())
+//     .then(response => console.log(response))
+//     .catch(err => console.error(err));
 

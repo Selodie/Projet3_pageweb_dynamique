@@ -203,6 +203,10 @@ footer nav ul {
 	gap: 10px;
 }
 
+#filters:hover {
+	cursor: pointer;
+}
+
 .filter.every{
 	color:#1D6154;
 	font-family: 'Syne';
@@ -265,6 +269,10 @@ footer nav ul {
 	color:white;
 }
 
+.filter.selected {
+	background-color: #1D6154;
+	color: white;
+}
 
 /* Login page */
 
