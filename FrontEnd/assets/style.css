@@ -47,7 +47,7 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+.main {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
@@ -138,7 +138,7 @@ li:hover {
 	width: 100%;
 
 }
-.form  {
+.form {
 	width: 50%;
 	margin: auto;
 }
@@ -146,10 +146,10 @@ li:hover {
 	text-align: center;
 
 }
-.form  h2{
+.form h2{
 	margin-bottom: 20px;
 }
-.form  form {
+.form form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
@@ -190,6 +190,9 @@ footer nav ul {
 /* add style for project */
 
 
+#portfolio h2 {
+	margin-top: 60px;
+}
 /* filters  */
 
 #filters {
@@ -298,4 +301,41 @@ button {
 .password {
 	color: #3D3D3D;
 	text-align: center;
+}
+
+
+/* barre au début de la page quand se connecte */
+
+.is_connected {
+	display:none;
+}
+
+#edit_mode {
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	background-color: black;
+	padding-bottom: 20px;
+}
+
+#edit{
+	font-size: 16px;
+	color: white;
+	padding-top: 19px;
+}
+
+.edit_project{
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+}
+
+#modify {
+	align-items: center;
+    padding-top: 30px;
+	gap: 10px;
+}
+
+#modify_text{
+	font-size: 14px;
 }

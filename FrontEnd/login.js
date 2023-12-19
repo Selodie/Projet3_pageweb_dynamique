@@ -34,13 +34,34 @@ form.addEventListener("submit", (event) => {
         if (response.token){
             //
             let token = response.token;
+            // on stock le token dans le local storage
             localStorage.setItem("token", token);
-            console.log(token);
-            window.location.replace( "index.html");    
+            // console.log(token);
+            window.location.replace( "index.html");
+
+            // let connect = localStorage.getItem("token");
+            // let tmpl = document.querySelectorAll(".template");
+            // tmpl.content.cloneNode(true);
+            // document.body.append(tmpl.content.cloneNode(true))
         // 
         } else {
             alert("Erreur dans l’identifiant ou le mot de passe")
         }
+
+        // let connect = localStorage.getItem("token");
+        // if(connect){
+        //     const divElement = document.getElementById("gall_img");
+        //     const hElement = document.createElement("h3");
+        //     hElement.innerHTML = "test";
+        //     divElement.appendChild(hElement);
+
+       
+        //     let tmpl = document.querySelectorAll(".template");
+        //     tmpl.content.cloneNode(true);
+        //     document.body.append(tmpl.content.cloneNode(true))
+        // }
+
+
     });
 })
 
