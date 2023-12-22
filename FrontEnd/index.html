@@ -60,10 +60,28 @@
 						<div id="modify" class="is_connected">
 							<i class="fa-regular fa-pen-to-square" style="color: #000000;"></i>
 							<p id="modify_text">modifier</p>
+							
+								<div id="modal" class="modal">
+									<div class="modal_content">
+										<span class="close">&times;</span>
+										<div class="modal_gallery">
+											<h3>Galerie photo</h3>
+											<div id="project_gallery">
+											</div>
+											<hr>
+											<button id="add_btn">Ajouter une photo</button>
+										</div>
+									</div>
+  								</div>
 						</div>
 					<!-- </template> -->
 				</div>
-				<div id="filters"></div>
+				<div id="filters">
+					<p class="filter every" data-category-id="0">Tous</p>
+					<p class="filter object" data-category-id="1">Objets</p>
+					<p class="filter appart" data-category-id="2">Appartements</p>
+					<p class="filter hotel" data-category-id="3">Hôtels & restaurants</p>
+				</div>
 
 				<div id="gall_img" class="gallery">
 				</div>

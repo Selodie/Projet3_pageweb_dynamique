@@ -41,11 +41,11 @@ document.addEventListener("click", event=> {
     // si clic sur logout dans le menu
     if(event.target.matches("#logout")){
         // efface le token du local storage
-        let disconnect = localStorage.removeItem("token");
+        localStorage.removeItem("token");
         // redirection vers la page d'accueil en étant déconnecté
         window.location.replace( "index.html");
     }
-   
+
 
 });
 
@@ -65,40 +65,6 @@ async function fetchProjects () {
     throw new Error ('Impossible de contacter le serveur')
 }
 
-// récupère la div où vont être situés les filtres de la galerie
-const filterElement = document.getElementById("filters");
-
-// création filtre tous
-const everyElement = document.createElement("p");
-// ajout d'une classe
-everyElement.classList.add("filter", "every");
-everyElement.innerHTML = "Tous";
-everyElement.dataset.categoryId = 0;
-filterElement.appendChild(everyElement);
-
-// filtre/affichage de tous les éléments
-
-// création filtre objets
-const objectElement = document.createElement("p");
-objectElement.classList.add("filter", "object");
-objectElement.innerHTML = "Objets";
-// ajout d'un attribut id 1
-objectElement.dataset.categoryId = 1;
-filterElement.appendChild(objectElement);
-
-// création filtre appartements
-const apartmentsElement = document.createElement("p");
-apartmentsElement.classList.add("filter","appart");
-apartmentsElement.innerHTML = "Appartements";
-apartmentsElement.dataset.categoryId = 2;
-filterElement.appendChild(apartmentsElement);
-
-// création filtre hotels et restaurants
-const hotelElement = document.createElement("p");
-hotelElement.classList.add("filter", "hotel");
-hotelElement.innerHTML = "Hôtels & restaurants";
-hotelElement.dataset.categoryId = 3;
-filterElement.appendChild(hotelElement);
 
 
 // on appel la fonction
@@ -118,7 +84,7 @@ fetchProjects().then(projects =>  {
         figureELement.dataset.figureId = project.categoryId;
 
         // création balise img, remplissage src et alt
-        const imgElement = document.createElement("img");
+        let imgElement = document.createElement("img");
         imgElement.src = project.imageUrl;
         imgElement.alt = project.title;
 
@@ -129,8 +95,59 @@ fetchProjects().then(projects =>  {
         // on définit les enfants des parents
         divElement.appendChild(figureELement);
         figureELement.appendChild(imgElement);
-        figureELement.appendChild(figcaptionElement);   
+        figureELement.appendChild(figcaptionElement);  
+    
     }
+
+    let modal = document.getElementById("modal");
+    // on récupère l'élément qui ouvre la modal
+    let btn = document.getElementById("modify_text");
+
+    // on recupère l'élément croix qui fermera la modal
+    let close = document.getElementsByClassName("close")[0];
+
+    // on récupère la div où vont s'afficher les img des projets
+    let projet_gallery = document.getElementById("project_gallery");
+
+    // boucle pour créer les img dans la modale
+    for (const project of projects) {
+
+        // création d'une div qui contient chaque img
+        const div_img = document.createElement("div");
+        div_img.classList.add("div_gall");  
+        projet_gallery.appendChild(div_img);
+
+        // création des img de la galerie
+        const img_gallery = document.createElement("img");
+        img_gallery.classList.add("img_gall");    
+        img_gallery.src = project.imageUrl;
+        div_img.appendChild(img_gallery);
+
+        // création de l'icône pour la suppression
+        const icon = document.createElement("i");
+        icon.className= "fa-solid fa-trash-can"; 
+        icon.dataset.figureId = project.categoryId;
+        div_img.appendChild(icon);
+
+        }
+
+    // au clic la modal s'ouvre
+    btn.onclick = function() {
+    modal.style.display = "block";
+    
+    }
+    // la modale se ferme quand on clic sur la croix
+    close.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // la modale se ferme si on clic en dehors de la croix
+    window.onclick = function(event) {
+        if (event.target == modal) {
+             modal.style.display = "none";
+        }
+  }
+   
 });
 
 let connect = localStorage.getItem("token");
@@ -151,7 +168,10 @@ if(connect){
     }
 
 }
-   
+
+
+
+
 
 
 
