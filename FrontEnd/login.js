@@ -1,4 +1,3 @@
-
 // Appel de l'API avec la méthode POST
 async function fetchUsers (email, password) {
     const url = 'http://localhost:5678/api/users/login';
@@ -7,7 +6,6 @@ async function fetchUsers (email, password) {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // Authorization: "Bearer Token"
         },
         body: JSON.stringify({
             email: email,
@@ -39,11 +37,6 @@ form.addEventListener("submit", (event) => {
             // console.log(token);
             window.location.replace( "index.html");
 
-            // let connect = localStorage.getItem("token");
-            // let tmpl = document.querySelectorAll(".template");
-            // tmpl.content.cloneNode(true);
-            // document.body.append(tmpl.content.cloneNode(true))
-        // 
         } else {
             alert("Erreur dans l’identifiant ou le mot de passe")
         }
@@ -51,21 +44,4 @@ form.addEventListener("submit", (event) => {
     });
 })
 
-
-
-
-
-
-
-
-// const options = {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-//     body: '{"email":"sophie.bluel@test.tld","password":"S0phie"}'
-//   };
-  
-//   fetch('http://localhost:5678/api/users/login', options)
-//     .then(response => response.json())
-//     .then(response => console.log(response))
-//     .catch(err => console.error(err));
 

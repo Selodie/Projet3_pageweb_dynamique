@@ -1,5 +1,9 @@
+// récupération du token dans le local storage
+let connect = localStorage.getItem("token");
+
 // filtres
 document.addEventListener("click", event=> {
+
     // event delegation. Condition si le click se fait sur ces classes alors effectue le code dessous
     if(event.target.matches(".filter")){
         
@@ -47,9 +51,54 @@ document.addEventListener("click", event=> {
     }
 
 
+// Suppression des projets via la modale
+
+   
+    // si un clic sur l'icône de la poubelle alors on appelle la fonction qui supprime les projets
+    if(event.target.matches(".fa-solid")){
+         // on récupère le dataset avec l'id sur l'icône de la poubelle
+        let iconId = event.target.dataset.iconId;
+        console.log("suppression", iconId);
+    
+        event.preventDefault();
+        deleteProject(iconId, connect).then(response =>  {
+           console.log(response);
+        });
+    }
 });
 
-// Appel API avec Fetch (pour works)
+// Appel API avec Fetch avec la méthode DELETE
+async function deleteProject (iconId, connect) {
+    const delete_url = `http://localhost:5678/api/works/${iconId}`;
+    const response = await fetch (delete_url, {
+        method: 'DELETE',
+        headers: {
+            // "Accept": "aplication/json",
+            "Authorization": `Bearer ${connect}`
+        },
+        
+
+    })
+    // dans le cas d'une erreur, affiche un message dans la console
+    if (response.ok === true){
+
+        // on supprime les projets de la page en ciblant leur class
+        let suppFigureElement = document.querySelector(".fig");
+        suppFigureElement.remove();
+
+        // on supprime les projets de la modale en ciblant leur class
+        let suppImgModal = document.querySelector(".div_gall");
+        suppImgModal.remove();
+
+        // console.log(response);
+        alert("Le projet a bien été supprimé !")
+        return response;
+    }
+    throw new Error ("La suppression à échoué !")
+} 
+
+
+// Appel API avec Fetch avec la méthode GET
 async function fetchProjects () {
     const url = 'http://localhost:5678/api/works';
     const response = await fetch (url, {
@@ -99,6 +148,8 @@ fetchProjects().then(projects =>  {
     
     }
 
+    // Création de la modale
+
     let modal = document.getElementById("modal");
     // on récupère l'élément qui ouvre la modal
     let btn = document.getElementById("modify_text");
@@ -109,6 +160,7 @@ fetchProjects().then(projects =>  {
     // on récupère la div où vont s'afficher les img des projets
     let projet_gallery = document.getElementById("project_gallery");
 
+    console.log("projects, %o", projects);
     // boucle pour créer les img dans la modale
     for (const project of projects) {
 
@@ -119,16 +171,16 @@ fetchProjects().then(projects =>  {
 
         // création des img de la galerie
         const img_gallery = document.createElement("img");
-        img_gallery.classList.add("img_gall");    
+        img_gallery.classList.add("img_gall");
+        img_gallery.dataset.imgId = project.id;    
         img_gallery.src = project.imageUrl;
         div_img.appendChild(img_gallery);
 
         // création de l'icône pour la suppression
         const icon = document.createElement("i");
         icon.className= "fa-solid fa-trash-can"; 
-        icon.dataset.figureId = project.categoryId;
+        icon.dataset.iconId = project.id;
         div_img.appendChild(icon);
-
         }
 
     // au clic la modal s'ouvre
@@ -150,7 +202,6 @@ fetchProjects().then(projects =>  {
    
 });
 
-let connect = localStorage.getItem("token");
 
 if(connect){
     
