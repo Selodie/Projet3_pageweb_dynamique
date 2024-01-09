@@ -360,7 +360,7 @@ button {
 }
 
 
-/* Modale */
+/* Modale de suppression */
 
 .modal {
 	display: none; 
@@ -465,3 +465,35 @@ button {
 	border: none;
 
   }
+
+  /* Modale d'ajout */
+
+  #submit_btn {
+	background-color: #CBD6DC;
+	color: #306685;
+  }
+
+
+  #add_picture {
+	background-color: #E8F1F6;
+  }
+
+  #btn-picture {
+	background-color: #CBD6DC;
+	color:#306685 ;
+  }
+
+  #add-project_modal {
+	display: none;
+  }
+
+  #arrow {
+	display: none;
+  }
+
+  #submit_picture {
+	color: #FFF;
+	background-color: #A7A7A7;
+
+  }
+

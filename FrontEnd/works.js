@@ -1,5 +1,48 @@
+// url
+let url = 'http://localhost:5678/api/works';
+
 // récupération du token dans le local storage
 let connect = localStorage.getItem("token");
+
+// Création de la modale pour la suppression de projet
+let modal = document.getElementById("modal");
+
+// on récupère l'élément qui ouvre la modal de suppression
+let btn = document.getElementById("modify_text");
+
+// on recupère l'élément croix qui fermera la modal
+let close = document.getElementsByClassName("close")[0];
+
+// on récupère la div où vont s'afficher les img des projets
+let projet_gallery = document.getElementById("project_gallery");
+
+// on récupère la div de la modale d'ajout des projets
+let add_modal = document.getElementById("add-project_modal");
+
+// on récupère la div de la modale de suppression
+let delete_modal = document.getElementById("delete_modal");
+
+// on récupère la flèche de la modale d'ajout
+let arrow = document.getElementById("arrow");
+
+
+ // au clic la modal s'ouvre
+ btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// la modale se ferme quand on clic sur la croix
+close.onclick = function() {
+    modal.style.display = "none";
+}
+
+// la modale se ferme si on clic en dehors de la croix
+window.onclick = function(event) {
+    if (event.target == modal) {
+            modal.style.display = "none";
+    }
+}
+
 
 // filtres
 document.addEventListener("click", event=> {
@@ -52,7 +95,6 @@ document.addEventListener("click", event=> {
 
 
 // Suppression des projets via la modale
-
    
     // si un clic sur l'icône de la poubelle alors on appelle la fonction qui supprime les projets
     if(event.target.matches(".fa-solid")){
@@ -62,12 +104,37 @@ document.addEventListener("click", event=> {
     
         event.preventDefault();
         deleteProject(iconId, connect).then(response =>  {
-           console.log(response);
+        //    console.log(response);
         });
     }
+
+    // condition pour faire apparaître / disparaître les éléments dans la modal selon l'ajout ou la suppression de projet
+    if(event.target.matches("#add_btn")){
+        add_modal.style.display = "flex";
+        delete_modal.style.display = "none";
+        arrow.style.display = "block";
+
+    }
+    
+    // condition pour faire un retour sur la précendente modale (de supp) lorsque l'on clic que la flèche
+    if(event.target.matches("#arrow")){
+        add_modal.style.display = "none";
+        delete_modal.style.display = "flex"; 
+        arrow.style.display = "none";
+    }
+
+
+    // Ajout des projets
+    if(event.target.matches("#submit_picture")){
+        // event.preventDefault();
+       addProject(url).then(response => {
+
+       })
+    } 
+
 });
 
-// Appel API avec Fetch avec la méthode DELETE
+// Appel API avec Fetch avec la méthode DELETE pour la suppression de projet
 async function deleteProject (iconId, connect) {
     const delete_url = `http://localhost:5678/api/works/${iconId}`;
     const response = await fetch (delete_url, {
@@ -98,9 +165,8 @@ async function deleteProject (iconId, connect) {
 } 
 
 
-// Appel API avec Fetch avec la méthode GET
+// Appel API avec Fetch avec la méthode GET pour l'affichage des projets
 async function fetchProjects () {
-    const url = 'http://localhost:5678/api/works';
     const response = await fetch (url, {
         method: 'GET',
         headers: {
@@ -112,6 +178,47 @@ async function fetchProjects () {
         return response.json();
     }
     throw new Error ('Impossible de contacter le serveur')
+}
+
+// Appel API avec fetch avec la méthode POST pour l'ajout de projets
+async function addProject(url) {
+
+// on récupère la valeur de l'input de l'image
+let fileInput = document.getElementById("picture");
+
+// on récupère la valeur de l'input title
+let title_value = document.getElementById("title").value;
+
+// on récupère la valeur de l'input category
+let category_value = document.getElementById("category").value;
+
+    let formData = new FormData();
+
+    formData.append("image", fileInput.files[0]);
+    formData.append("title", title_value);
+    formData.append("category", category_value);
+
+    for (var pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
+
+    const response = await fetch (url, {
+        method: 'POST',
+        headers: {
+            // Accept: "application/json",
+            // 'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${connect}`
+        },
+        body: formData
+    })
+
+    if (response.ok === true){
+        // console.log(response);
+        alert("Le projet a bien été ajouté")
+        return response;
+    }
+    throw new Error ("L'ajout à échoué !")
+
 }
 
 
@@ -148,19 +255,9 @@ fetchProjects().then(projects =>  {
     
     }
 
-    // Création de la modale
+   
+    // console.log("projects, %o", projects);
 
-    let modal = document.getElementById("modal");
-    // on récupère l'élément qui ouvre la modal
-    let btn = document.getElementById("modify_text");
-
-    // on recupère l'élément croix qui fermera la modal
-    let close = document.getElementsByClassName("close")[0];
-
-    // on récupère la div où vont s'afficher les img des projets
-    let projet_gallery = document.getElementById("project_gallery");
-
-    console.log("projects, %o", projects);
     // boucle pour créer les img dans la modale
     for (const project of projects) {
 
@@ -183,22 +280,7 @@ fetchProjects().then(projects =>  {
         div_img.appendChild(icon);
         }
 
-    // au clic la modal s'ouvre
-    btn.onclick = function() {
-    modal.style.display = "block";
-    
-    }
-    // la modale se ferme quand on clic sur la croix
-    close.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // la modale se ferme si on clic en dehors de la croix
-    window.onclick = function(event) {
-        if (event.target == modal) {
-             modal.style.display = "none";
-        }
-  }
+   
    
 });
 
