@@ -85,6 +85,8 @@ h2{
 	color: #1D6154;
 	text-align:center;
 }
+
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -195,6 +197,10 @@ a {
 	color: black;
 }
 
+h3 {
+	text-align: center;
+}
+
 #portfolio h2 {
 	margin-top: 60px;
 }
@@ -281,6 +287,7 @@ a {
 	background-color: #1D6154;
 	color: white;
 }
+
 
 /* Login page */
 
@@ -485,10 +492,13 @@ button {
 
   #add-project_modal {
 	display: none;
+	flex-direction: column;
+	
   }
 
   #arrow {
 	display: none;
+	cursor: pointer;
   }
 
   #submit_picture {
@@ -497,3 +507,14 @@ button {
 
   }
 
+#category {
+	height: 50px;
+    width: 80%;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#form_project {
+	width: 100%;
+}
