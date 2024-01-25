@@ -34,7 +34,7 @@ form.addEventListener("submit", (event) => {
             let token = response.token;
             // on stock le token dans le local storage
             localStorage.setItem("token", token);
-            // console.log(token);
+            // redirection vers la page d'accueil en étant connecté
             window.location.replace( "index.html");
 
         } else {
