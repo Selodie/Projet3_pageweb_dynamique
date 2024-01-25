@@ -57,10 +57,11 @@ header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
-	padding-bottom: 30px;
+	padding-bottom: 25px;
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
+	padding-top: 25px;
 }
 
 h1{
@@ -93,6 +94,8 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
+	gap: 19px;
+    margin-right: 20px;
 
 }
 nav li {
@@ -106,8 +109,9 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
-	padding-top: 30px;
+	padding-top: 40px;
 	margin-left: 45px;
+	gap: 10px;
 }
 #introduction figure {
 	flex: 1
@@ -160,9 +164,15 @@ li:hover {
 }
 .form form {
 	text-align: left;
-	margin-top:30px;
+	margin-top:10px;
 	display: flex;
 	flex-direction: column;
+}
+
+#contact {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
 }
 
 .form input {
@@ -173,7 +183,7 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 .form label {
-	margin: 2em 0 1em 0;
+	margin: 2em 0 0.7em 0;
 }
 .form textarea {
 	border: none;
@@ -189,6 +199,11 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+}
+
+footer nav {
+	margin-right: 44px;
+    padding-right: 44px;
 }
 
 footer nav ul {
@@ -334,6 +349,10 @@ button {
 	text-align: center;
 	border: #1D6154;
 	border-radius: 60px ;
+}
+
+#send_btn {
+	margin-top: 38px;
 }
 
 .password {
@@ -521,7 +540,7 @@ button {
 	align-items: center;
   }
 
-  #btn-picture {
+  #btn_picture {
 	padding: 10px 30px 10px 30px;
 	background-color: #CBD6DC;
 	color:#306685 ;

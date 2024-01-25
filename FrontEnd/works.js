@@ -210,7 +210,7 @@ document.addEventListener("click", event=> {
     deleteModal.style.display = "none";
 }
 
-// condition pour faire un retour sur la précendente modale (de supp) lorsque l'on clic que la flèche
+// fonction pour faire un retour sur la précendente modale (de supp) lorsque l'on clic que la flèche
 let returnBack = function(){
     // on récupère la div de la modale d'ajout des projets
     let addModal = document.getElementById("add-project_modal");
@@ -324,8 +324,10 @@ let colorBtnChange = function(){
         closeModal();
 
     // on vide les valeurs des input
-    let fileInput = document.getElementById("image");
-    fileInput.value ="";
+    let showDivImgChoice = document.getElementById("adding_elements");
+    showDivImgChoice.style.display = "flex";
+    let fileInput = document.querySelector(".image_viewing");
+    fileInput.style.display ="none";
     let titleValue = document.getElementById("title");
     titleValue.value ="";
     let categoryValue = document.getElementById("category");
@@ -342,7 +344,7 @@ if(connect){
         let editElement = editElements[k];
         editElement.style.display= "flex";
     }
-    // boucle pour faire disparaître les éléments html portant la classe "filter"
+    // boucle pour faire disparaître les éléments html portant la classe filter
     let disappearElements = document.querySelectorAll(".filter");
     for(let l = 0; l < disappearElements.length; l++){
         let disappearElement = disappearElements[l];
