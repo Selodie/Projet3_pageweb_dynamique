@@ -336,6 +336,7 @@ h3 {
 
 #btn_login {
 	margin-top: 36px;
+	cursor: pointer;
 }
 
 button {
@@ -379,6 +380,7 @@ button {
 
 .is_connected {
 	display:none;
+	cursor: pointer;
 }
 
 #edit_mode {
@@ -436,7 +438,7 @@ button {
 	padding: 20px;
 	border: 1px solid #888;
 	width: 36%;
-	height: 79%;
+	height: 83%;
 	border-radius: 10px; 
   }
   
@@ -482,6 +484,7 @@ button {
 	display: flex;
 	padding: 10px 49px 9px 49px;
 	width: auto;
+	cursor: pointer;
   }
 
   #project_gallery {
@@ -546,6 +549,7 @@ button {
 	color:#306685 ;
 	margin-top: 8px;
     margin-bottom: 5px;
+	cursor: pointer;
   }
 
   #add-project_modal {
@@ -565,6 +569,7 @@ button {
 	justify-content: center;
 	color: #FFF;
 	background-color: #A7A7A7;
+	cursor: pointer;
 
   }
 

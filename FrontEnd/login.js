@@ -21,7 +21,7 @@ const form = document.querySelector('form');
 form.addEventListener("submit", (event) => {
     // On empêche le comportement par défaut
     event.preventDefault();
-
+    
     // On récupère la valeur des input email et mdp
     const emailValue = document.getElementById("email").value;
     const passwordValue = document.getElementById("password").value;
